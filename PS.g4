@@ -5,18 +5,19 @@ options {
 }
 
 WS: [ \t\r\n]+ -> skip;
+STYLE: ('\\displaystyle' | '\\textstyle' | '\\scriptstyle') -> skip;
 
 ADD: '+';
 SUB: '-';
 MUL: '*';
 DIV: '/';
 
-L_PAREN: '(';
-R_PAREN: ')';
+L_PAREN: '(' | '\\left(' | '\\bigl(' | '\\Bigl(' | '\\biggl(' | '\\Biggl(';
+R_PAREN: ')' | '\\right)' | '\\bigr)' | '\\Bigr)' | '\\biggr)' | '\\Biggr)';
 L_BRACE: '{';
 R_BRACE: '}';
-L_BRACKET: '[';
-R_BRACKET: ']';
+L_BRACKET: '[' | '\\left[' | '\\lbrack';
+R_BRACKET: ']' | '\\right]' | '\\rbrack';
 
 BAR: '|';
 
@@ -81,7 +82,7 @@ BANG: '!';
 
 SYMBOL: '\\' [a-zA-Z]+;
 
-math: relation;
+math: STYLE? relation;
 
 relation:
     relation (EQUAL | LT | LTE | GT | GTE) relation
@@ -196,7 +197,7 @@ func:
     L_BRACE base=expr R_BRACE
 
     | (FUNC_SUM | FUNC_PROD)
-    (subeq supexpr | supexpr subeq)
+    (subeq supexpr | supexpr subeq | subeq | subexpr)
     mp
     | FUNC_LIM limit_sub mp;
 
