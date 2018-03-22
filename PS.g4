@@ -84,7 +84,7 @@ BANG: '!';
 
 SYMBOL: '\\' [a-zA-Z]+;
 
-math: STYLE? relation;
+math: STYLE? relation EOF;
 
 relation:
     relation (EQUAL | LT | LTE | GT | GTE) relation
