@@ -21,6 +21,8 @@ R_BRACKET: ']' | '\\right]' | '\\rbrack';
 
 BAR: '|';
 
+LIMITS: '\\limits' -> skip;
+
 FUNC_LIM:  '\\lim';
 LIM_APPROACH_SYM: '\\to' | '\\rightarrow' | '\\Rightarrow' | '\\longrightarrow' | '\\Longrightarrow';
 FUNC_INT:  '\\int';
@@ -196,7 +198,7 @@ func:
     (L_BRACKET root=expr R_BRACKET)?
     L_BRACE base=expr R_BRACE
 
-    | (FUNC_SUM | FUNC_PROD)
+    | (FUNC_SUM | FUNC_PROD) LIMITS?
     (subeq supexpr | supexpr subeq | subeq | subexpr)
     mp
     | FUNC_LIM limit_sub mp;
