@@ -149,8 +149,12 @@ def convert_postfix_list(arr, i=0):
                     # symbol in between is 'x', treat as multiplication.
                     if len(left_syms) == 0 and len(right_syms) == 0 and str(res) == "x":
                         return convert_postfix_list(arr, i + 1)
+
+            next_res = convert_postfix_list(arr, i + 1)
+            if res.is_Number and next_res.is_Number:
+                raise Exception("Not a valid number, expected operator")
             # multiply by next
-            return sympy.Mul(res, convert_postfix_list(arr, i + 1), evaluate=False)
+            return sympy.Mul(res, next_res, evaluate=False)
     else: # must be derivative
         wrt = res[0]
         if i == len(arr) - 1:
