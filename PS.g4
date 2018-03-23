@@ -72,7 +72,8 @@ LETTER: [a-zA-Z];
 fragment DIGIT: [0-9];
 NUMBER:
     DIGIT+ (',' DIGIT DIGIT DIGIT)*
-    | DIGIT* (',' DIGIT DIGIT DIGIT)* '.' DIGIT+;
+    | DIGIT* (',' DIGIT DIGIT DIGIT)* '.' DIGIT+
+    | DIGIT+ '.' DIGIT?;
 
 EQUAL: '=';
 LT: '<';

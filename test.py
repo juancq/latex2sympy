@@ -23,6 +23,8 @@ def _log(a, b):
 # These latex strings should parse to the corresponding
 # SymPy expression
 GOOD_PAIRS = [
+    ("1.", 1.0),
+    ("1.0", 1.0),
     ("0", 0),
     ("1", 1),
     ("-3.14", _Mul(-1, 3.14)),
@@ -164,6 +166,7 @@ BAD_STRINGS = [
     "\\sqrt",
     "{",
     "}",
+    "1.1.",
     "1.1.1",
     "\\mathit{x + y}",
     "\\mathit{21}",
